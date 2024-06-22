@@ -1,10 +1,55 @@
-<title>Animal Predict App</title>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog or Cat</title>
+    <style>
+        body {
+            display: block;
+            justify-content: center;
+            align-items: start;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* border: 1px solid #ccc; */
+            padding: 20px;
+            /* border-radius: 10px; */
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+        div {
+            display: flex;
+            justify-content: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
 {% if animalName %}
     <h1>この子は {{ animalName }} です</h1>
     <div>
         <img src="{{ image }}">
     </div>
-    <a href="./">トップへ戻る</a>
+    <div>
+        <a href="./">トップへ戻る</a>
+    </div>
 {% else %}
     <a href="./">トップへ戻る</a>
 {% endif %}
+</body>
+</html>
