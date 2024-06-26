@@ -62,7 +62,8 @@ def predicts():
             image = Image.open(file).convert('RGB')
 
             # リサイズ
-            image = scale_to_width(image, 256)
+            if image.width > 512:
+                image = scale_to_width(image, 512)
 
             #　画像データをバッファに書き込む
             image.save(buf, 'png')
