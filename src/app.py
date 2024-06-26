@@ -37,6 +37,11 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif', 'jpeg'])
 def allwed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# アスペクト比を固定して、幅が指定した値になるようリサイズする。
+def scale_to_width(img, width):
+    height = round(img.height * width / img.width)
+    return img.resize((width, height))
+
 # URL にアクセスがあった場合の挙動の設定
 @app.route('/', methods = ['GET', 'POST'])
 def predicts():
@@ -51,9 +56,14 @@ def predicts():
         if file and allwed_file(file.filename):
 
             #　画像ファイルに対する処理
+
             #　画像書き込み用バッファを確保
             buf = io.BytesIO()
             image = Image.open(file).convert('RGB')
+
+            # リサイズ
+            image = scale_to_width(image, 256)
+
             #　画像データをバッファに書き込む
             image.save(buf, 'png')
             #　バイナリデータを base64 でエンコードして utf-8 でデコード
